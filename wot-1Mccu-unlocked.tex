@@ -1,0 +1,414 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{pgfpages}
+\usepackage{ulem}
+\usepackage{float}
+\usepackage{amsmath}
+
+\setbeameroption{hide notes}
+
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{author}{fg=white}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{frametitle}{fg=black}
+\setbeamercolor{item}{fg=red}
+\setbeamercolor{block title}{fg=red}
+\setbeamercolor{section in toc}{fg=red}
+\setbeamercolor{footline}{fg=white}
+\setbeamercolor{title in head/foot}{fg=white,bg=black}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{
+    \includegraphics[height=1mm, width=\paperwidth]{wg-headline.png}
+}
+
+\setbeamertemplate{footline}{
+    \begin{beamercolorbox}[ht=1.2em]{title in head/foot}
+        {\footnotesize \hspace{1em}\inserttitle, \insertshortauthor}
+    \end{beamercolorbox}
+}
+
+\begin{document}
+
+\title{World of Tanks: один миллион игроков онлайн}
+\author{Максим Мельников}
+\date{}
+
+{
+\title{
+    \includegraphics[width=0.4\textwidth]{wg-logo.png}
+    \\
+    {\huge WORLD OF TANKS\\ \vspace{0.5em} ОДИН МИЛЛИОН ИГРОКОВ ОНЛАЙН}
+}
+\author{МАКСИМ МЕЛЬНИКОВ}
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{wg-end.jpg}}
+\begin{frame}[plain]{}
+    \titlepage
+\end{frame}
+}
+
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{wg-bg.jpg}}
+\logo{
+    \includegraphics[height=1.7cm]{wg-logo.png}
+}
+
+\section{Intro}
+\begin{frame}{КТО Я}
+    \begin{itemize}
+        \item Разработчик в Wargaming (Минск, Беларусь)
+            \begin{itemize}
+                \item \sout{Order of War}
+                \item \sout{Order of War: Challenge}
+                \item World of Tanks developer
+            \end{itemize}
+        \item Linux Mobile hobbyist
+            \begin{itemize}
+                \item \sout{Openmoko}
+                \item systemd
+                \item telepathy
+                \item Gentoo
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{WORLD OF TANKS}
+    \begin{itemize}
+        \item mmorpg
+        \item fps о танках
+        \item 15x15 pvp
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{WORLD OF TANKS СЕГОДНЯ}
+    \begin{itemize}
+        \item 1.1M одновременно играющих в пике
+        \item 11M сообщений в секунду
+        \item 500 серверов для обслуживания игры
+        \item 60M посещений игрового портала в месяц
+        \item 6PB (петабайт) на установку и обновления игрового клиента в месяц
+    \end{itemize}
+\end{frame}
+
+\section{Big Project --- Big Problems}
+{
+\usebackgroundtemplate{\includegraphics[height=\paperheight]{pain.jpg}}
+\begin{frame}[plain]{}
+\end{frame}
+}
+
+\begin{frame}{ЧИТЕРЫ}
+    \begin{itemize}
+        \item много игроков хотят читить
+        \item читеры делают других игроков не счасливыми
+        \item ксенофобия
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{МАСШАТАБИРОВАНИЕ}
+    \begin{itemize}
+        \item лучше продукт --- больше игроков
+        \item больше игроков --- больше серверов
+        \item больше серверов --- сильнее проблема синхронизации
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{ПРОБЛЕМА ЕДИНОГО ДАТАЦЕНТРА}
+    \begin{itemize}
+        \item латентность
+        \item доступность
+        \item единая точка отказа
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{BIG DATA}
+    \begin{itemize}
+        \item больше игроков --- больше данных
+        \item больше данных --- больше дисков
+        \item внезапно, нужны соверешенно новые решения для хранения данных
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{БЫСТРЫЙ РОСТ}
+    \begin{itemize}
+        \item простые решения --- время выхода на рынок
+        \item большой успех --- простые решения совершенно непригодными
+        \item переделывание всего на лету
+        \item изменение бизнес требований каждый день
+    \end{itemize}
+\end{frame}
+
+\section{Ideas}
+{
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{ideas.jpg}}
+\begin{frame}[plain]{}
+\end{frame}
+}
+\begin{frame}{НИКТО ВАМ НЕ ПОМОЖЕТ}
+    \begin{itemize}
+        \item нет времени на обучение людей
+        \item нет времени на ожидаение поддержки от сторонних вендоров
+        \item нет времени на написание хороших, правильных решений
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{ПОЛНЫЙ КОНТРОЛЬ}
+    \begin{itemize}
+        \item софт
+        \item железо
+        \item данные
+        \item команда
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{LINUX И OPEN SOURCE}
+    \begin{itemize}
+        \item готовые к использованию компоненты
+        \item хорошая документация
+        \item возможность костомизации когда необходимо
+        \item найм людей с необходимымми навыками
+    \end{itemize}
+\end{frame}
+
+\section{World of Tanks Internals}
+{
+\usebackgroundtemplate{\includegraphics[height=\paperheight]{dev.jpg}}
+\begin{frame}[plain]{}
+\end{frame}
+}
+
+\begin{frame}{АРХИТЕКТУРА WORLD OF TANKS}
+    \begin{itemize}
+        \item клиент игры --- тонкий клиент, плеер
+        \item сервер --- расчёт игрового мира
+        \item кластер --- сотни процессов работающих как единое целое (сервер)
+        \item игровой мир --- пошаговый, шаги очень маленькие
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{КОМПОНЕНТЫ СЕРВЕРА}
+    \begin{columns}
+
+    \begin{column}{0.33\textwidth}
+    \begin{block}{Storage*}
+        \begin{itemize}
+            \item MySQL
+            \item MySQL*
+            \item RabbitMQ
+        \end{itemize}
+    \end{block}
+    \end{column}
+
+    \begin{column}{0.33\textwidth}
+    \begin{block}{Nodes}
+        \begin{itemize}
+            \item BaseApp
+            \item CellApp
+            \item LoginApp
+        \end{itemize}
+    \end{block}
+    \end{column}
+
+    \begin{column}{0.33\textwidth}
+    \begin{block}{Managers}
+        \begin{itemize}
+            \item BaseAppMgr
+            \item CellAppMgr
+            \item DbMgr
+        \end{itemize}
+    \end{block}
+    \end{column}
+
+    \end{columns}
+    \vspace*{1cm}
+\end{frame}
+
+{
+\logo{}
+\begin{frame}{АРХИТЕКТУРА КЛАСТЕРА}
+\includegraphics[width=0.90\paperwidth]{server.png}
+\end{frame}
+}
+
+\begin{frame}{РАЗРАБОТКА СЕРВЕРА}
+    \begin{enumerate}
+        \item обычный Python
+        \item GC выключен
+        \item немного C++
+        \item RPC - на базе сообщений
+        \item UDP-based протокол с гарантией доставки
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{ОТКАЗОУСТОЙЧИВОСТЬ}
+    \begin{itemize}
+        \item объекты только в памяти
+        \item репликация объектов на случай отказа
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{ПЕРЕЕЗДЕЦ}
+    \begin{itemize}
+        \item много кластеров
+        \item быстрое перемещение между кластерами
+        \item выделенный кластер для хранения данных
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{АРХИТЕКТУРА МЕТАКЛАСТЕРА}
+    \begin{columns}
+
+    \begin{column}{0.5\textwidth}
+    \begin{block}{Центр}
+        \begin{itemize}
+            \item постоянное хранилище
+            \item аккаунты (proxy)
+            \item взаимодействие с web-ом
+        \end{itemize}
+    \end{block}
+    \end{column}
+    
+    \begin{column}{0.5\textwidth}
+    \begin{block}{Периферия RU1, RU2, ...}
+        \begin{itemize}
+            \item временное хранилище
+            \item аккаунты
+            \item бои
+        \end{itemize}
+    \end{block}
+    \end{column}
+
+    \end{columns}
+\end{frame}
+
+\begin{frame}{ПРEИМУЩЕСТВА МЕТАКЛАСТЕРА}
+    \begin{enumerate}
+        \item масштабируемость
+        \item гео-распределённость
+        \item отказоустойчивость
+        \item независимость
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{ПРОДАКШЕН}
+    \begin{enumerate}
+        \item 500 серверов
+        \item 8k CPU ядер
+        \item 32 TB RAM 
+        \item Linux
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{MySQL}
+    \begin{itemize}
+        \item размер базы: 300 GB
+        \item 384 GB RAM
+        \item Percona 5.5 (buffer pool warming --- 1GBps)
+        \item 40k SELECT, 1k INSERT, 1k UPDATE в секунду
+        \item 24 HDD $*$ 600 GB $*$ 0.5 = 6 TB
+    \end{itemize}
+\end{frame}
+
+\section{Forgotten}
+{
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{forgotten.jpg}}
+\begin{frame}[plain]{}
+\end{frame}
+}
+
+\begin{frame}{ВЕБ ЗАДАЧИ}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+        \begin{itemize}
+            \item регистрация
+            \item новости
+            \item статьи и описания
+            \item медиа контент
+            \item платёжная форма
+            \item обработка платежей
+        \end{itemize}
+        \end{column}
+
+        \begin{column}{0.4\textwidth}
+        \begin{itemize}
+            \item раздача обновлений
+            \item управление пользователями
+            \item профиль игрока
+            \item статистика
+            \item рейтинги
+            \item ...
+        \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{ИНТЕГРАЦИЯ С ИГРОВЫМ СЕРВЕРОМ}
+    \begin{itemize}
+        \item AMQP --- протокол взаимодействия с игровым сервером
+        \item XML-RPC обёртка над AMQP
+        \item реплика данных игры в реляционном виде
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{СЕРВИСНАЯ АРХИТЕКТУРА}
+    \begin{itemize}
+        \item множество различных проектов
+        \item протоколы взаимодействия: AMQP, HTTP, SQL, XML-RPC
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{LNAMPMR}
+\includegraphics[width=0.2\textwidth]{linux-logo.png}\hspace{0.5cm}
+\includegraphics[width=0.2\textwidth]{nginx-logo.png}\hspace{0.5cm}
+\includegraphics[width=0.2\textwidth]{apache-logo.png}\hspace{0.5cm}
+\includegraphics[width=0.2\textwidth]{mysql-logo.png}
+\vspace{0.5cm}
+\includegraphics[width=0.2\textwidth]{python-logo.png}\hspace{0.5cm}
+\includegraphics[width=0.2\textwidth]{memcached-logo.png}\hspace{0.5cm}
+\includegraphics[width=0.2\textwidth]{rabbitmq-logo.png}\hspace{0.5cm}
+\end{frame}
+
+\begin{frame}{Other}
+\includegraphics[width=0.2\textwidth]{uwsgi-logo.png}\hspace{0.5cm}
+\includegraphics[width=0.2\textwidth]{twisted-logo.png}\hspace{0.5cm}
+\includegraphics[width=0.2\textwidth]{php-logo.png}\hspace{0.5cm}
+\includegraphics[width=0.2\textwidth]{ruby-logo.png}
+\vspace{0.5cm}
+\includegraphics[width=0.2\textwidth]{postgresql-logo.png}\hspace{0.5cm}
+\includegraphics[width=0.2\textwidth]{mongodb-logo.png}\hspace{0.5cm}
+\includegraphics[width=0.2\textwidth]{redis-logo.png}\hspace{0.5cm}
+\end{frame}
+
+{
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{wot.jpg}}
+\begin{frame}[plain]{}
+\end{frame}
+}
+
+{
+\setbeamertemplate{footline}{}
+
+\logo{
+    \includegraphics[height=1.7cm]{wg-logo.png}
+}
+
+\setbeamercolor{frametitle}{fg=white}
+\setbeamercolor{normal text}{fg=white}
+\setbeamercolor{block title}{fg=white}
+\setbeamercolor{block body}{fg=red}
+
+\usebackgroundtemplate{\includegraphics[height=\paperheight]{wg-end.jpg}}
+\begin{frame}{СПАСИБО ЗА ВНИМАНИЕ. ВОПРОСЫ}
+    \begin{block}{МАКСИМ МЕЛЬНИКОВ}
+    \par \url{mailto:m\_melnikau@wargaming.net}
+    \par \url{https://plus.google.com/+MaksimMelnikau/}
+    \par \url{https://twitter.com/max\_posedon}
+    \par \url{http://wargaming.com}
+    \end{block}
+\end{frame}
+}
+
+\end{document}
